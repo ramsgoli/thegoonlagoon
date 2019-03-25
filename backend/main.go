@@ -15,6 +15,9 @@ func main() {
 
 	router.HandleFunc("/api/user/login", controllers.Login).Methods("POST")
 	router.HandleFunc("/api/user/signup", controllers.SignUp).Methods("POST")
+	router.HandleFunc("/api/test", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("Welcome"))
+	})
 
 	port := os.Getenv("PORT")
 	if port == "" {

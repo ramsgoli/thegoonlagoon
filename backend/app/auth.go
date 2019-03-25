@@ -1,12 +1,16 @@
 package app
 
 import (
+	"thegoonlagoon/utils"
+	"thegoonlagoon/models"
+	"github.com/dgrijalva/jwt-go"
 	"net/http"
 	"strings"
-	"thegoonlagoon/utils"
+	"context"
+	"os"
 )
 
-var JwtAuthentication = func(next http.Handler) http.Handler {
+func JwtAuthentication(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		notAuth := []string{"/api/user/signup", "/api/user/login"}
 		requestPath := r.URL.Path
@@ -23,6 +27,7 @@ var JwtAuthentication = func(next http.Handler) http.Handler {
 
 		if tokenHeader == "" {
 			response = utils.Message(false, "Missing auth token")
+			w.Header().Add("Content-Type", "application/json")
 			w.WriteHeader(http.StatusForbidden)
 			utils.Respond(w, response)
 			return
@@ -31,11 +36,35 @@ var JwtAuthentication = func(next http.Handler) http.Handler {
 		splitted := strings.Split(tokenHeader, " ")
 		if len(splitted) != 2 {
 			response = utils.Message(false, "Malformed token")
+			w.Header().Add("Content-Type", "application/json")
 			w.WriteHeader(http.StatusForbidden)
 			utils.Respond(w, response)
 			return
 		}
 
+		tk := models.Token{}
+		token, err := jwt.ParseWithClaims(splitted[1], &tk, func(token *jwt.Token) (interface{}, error) {
+			return []byte(os.Getenv("signing_key")), nil
+		})
+
+		if err != nil {
+			response = utils.Message(false, "Malformed token")
+			w.Header().Add("Content-Type", "application/json")
+			w.WriteHeader(http.StatusForbidden)
+			utils.Respond(w, response)
+			return
+		}
+
+		if !token.Valid {
+			response = utils.Message(false, "Token is not valid")
+			w.Header().Add("Content-Type", "application/json")
+			w.WriteHeader(http.StatusForbidden)
+			utils.Respond(w, response)
+			return
+		}
+
+		ctx := context.WithValue(r.Context(), "user", tk.UserId)
+		r = r.WithContext(ctx)
 		next.ServeHTTP(w, r)
 	})
 }
