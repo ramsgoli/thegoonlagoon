@@ -7,10 +7,11 @@ import (
 )
 
 type Account struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
+	Username  string `json:"username"`
+	Password  string `json:"password"`
 	FirstName string `json:"first_name"`
-	LastName string `json:"last_name"`
+	LastName  string `json:"last_name"`
+	Verified  bool   `json:"verified"`
 	gorm.Model
 }
 
@@ -29,8 +30,8 @@ func (account *Account) Validate() (bool, map[string]interface{}) {
 	return true, utils.Message(true, "OK")
 }
 
-func (account *Account) Create() (map[string]interface{}) {
-	if ok, message:= account.Validate(); !ok {
+func (account *Account) Create() map[string]interface{} {
+	if ok, message := account.Validate(); !ok {
 		return message
 	}
 
@@ -57,7 +58,7 @@ func (account *Account) Create() (map[string]interface{}) {
 	return message
 }
 
-func Login(username string, password string) (map[string]interface{}) {
+func Login(username string, password string) map[string]interface{} {
 	account := &Account{}
 	err := db.Where("username = ?", username).First(account).Error
 

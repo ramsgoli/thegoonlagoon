@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"net/http"
 	"encoding/json"
+	"net/http"
 	"thegoonlagoon/models"
 	"thegoonlagoon/utils"
 )

@@ -1,11 +1,11 @@
 package models
 
 import (
-	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"fmt"
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/joho/godotenv"
 	"os"
-	"fmt"
 )
 
 var db *gorm.DB
@@ -40,4 +40,3 @@ func init() {
 func GetDB() *gorm.DB {
 	return db
 }
-

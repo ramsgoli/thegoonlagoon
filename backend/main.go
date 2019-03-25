@@ -1,12 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gorilla/mux"
-	"thegoonlagoon/app"
-	"thegoonlagoon/controllers"
 	"net/http"
 	"os"
-	"fmt"
+	"thegoonlagoon/app"
+	"thegoonlagoon/controllers"
 )
 
 func main() {
@@ -26,7 +26,7 @@ func main() {
 
 	fmt.Println("Port: " + port)
 
-	err := http.ListenAndServe(":" + port, router)
+	err := http.ListenAndServe(":"+port, router)
 	if err != nil {
 		fmt.Print(err)
 	}

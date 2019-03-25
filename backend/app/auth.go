@@ -1,13 +1,13 @@
 package app
 
 import (
-	"thegoonlagoon/utils"
-	"thegoonlagoon/models"
+	"context"
 	"github.com/dgrijalva/jwt-go"
 	"net/http"
-	"strings"
-	"context"
 	"os"
+	"strings"
+	"thegoonlagoon/models"
+	"thegoonlagoon/utils"
 )
 
 func JwtAuthentication(next http.Handler) http.Handler {
