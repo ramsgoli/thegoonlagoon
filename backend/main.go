@@ -14,6 +14,7 @@ func main() {
 	router.Use(app.JwtAuthentication)
 
 	router.HandleFunc("/api/user/login", controllers.Login).Methods("POST")
+	router.HandleFunc("/api/user/signup", controllers.SignUp).Methods("POST")
 
 	port := os.Getenv("PORT")
 	if port == "" {

@@ -1,10 +1,43 @@
 package models
 
-type Token struct {
+import (
+	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"github.com/jinzhu/gorm"
+	"github.com/joho/godotenv"
+	"os"
+	"fmt"
+)
+
+var db *gorm.DB
+
+func init() {
+	err := godotenv.Load()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	host := os.Getenv("db_host")
+	name := os.Getenv("db_name")
+	user := os.Getenv("db_user")
+	password := os.Getenv("db_password")
+	port := os.Getenv("db_port")
+
+	dbUri := fmt.Sprintf("host=%s user=%s dbname=%s port=%s password=%s sslmode=disable", host, user, name, port, password)
+	conn, err := gorm.Open("postgres", dbUri)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	db = conn
+
+	// Migrate the schema
+	db.AutoMigrate(&Account{})
 
 }
 
-type Account struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
+func GetDB() *gorm.DB {
+	return db
 }
+
