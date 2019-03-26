@@ -44,7 +44,7 @@ func JwtAuthentication(next http.Handler) http.Handler {
 
 		tk := models.Token{}
 		token, err := jwt.ParseWithClaims(splitted[1], &tk, func(token *jwt.Token) (interface{}, error) {
-			return []byte(os.Getenv("signing_key")), nil
+			return []byte(os.Getenv("SIGNING_KEY")), nil
 		})
 
 		if err != nil {

@@ -17,11 +17,11 @@ func init() {
 		return
 	}
 
-	host := os.Getenv("db_host")
-	name := os.Getenv("db_name")
-	user := os.Getenv("db_user")
-	password := os.Getenv("db_password")
-	port := os.Getenv("db_port")
+	host := os.Getenv("DB_HOST")
+	name := os.Getenv("DB_NAME")
+	user := os.Getenv("DB_USER")
+	password := os.Getenv("DB_PASSWORD")
+	port := os.Getenv("DB_PORT")
 
 	dbUri := fmt.Sprintf("host=%s user=%s dbname=%s port=%s password=%s sslmode=disable", host, user, name, port, password)
 	conn, err := gorm.Open("postgres", dbUri)

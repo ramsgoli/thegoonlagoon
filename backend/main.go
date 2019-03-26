@@ -19,7 +19,7 @@ func main() {
 		w.Write([]byte("Welcome"))
 	})
 
-	port := os.Getenv("PORT")
+	port := os.Getenv("GOONLAGOONPORT")
 	if port == "" {
 		port = "8080"
 	}
