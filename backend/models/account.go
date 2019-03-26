@@ -2,8 +2,8 @@ package models
 
 import (
 	"github.com/jinzhu/gorm"
+	"github.com/ramsgoli/thegoonlagoon/utils"
 	"golang.org/x/crypto/bcrypt"
-	"thegoonlagoon/utils"
 )
 
 type Account struct {

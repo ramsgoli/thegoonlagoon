@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 	"github.com/gorilla/mux"
+	"github.com/ramsgoli/thegoonlagoon/app"
+	"github.com/ramsgoli/thegoonlagoon/controllers"
 	"net/http"
 	"os"
-	"thegoonlagoon/app"
-	"thegoonlagoon/controllers"
 )
 
 func main() {

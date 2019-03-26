@@ -3,11 +3,11 @@ package app
 import (
 	"context"
 	"github.com/dgrijalva/jwt-go"
+	"github.com/ramsgoli/thegoonlagoon/models"
+	"github.com/ramsgoli/thegoonlagoon/utils"
 	"net/http"
 	"os"
 	"strings"
-	"thegoonlagoon/models"
-	"thegoonlagoon/utils"
 )
 
 func JwtAuthentication(next http.Handler) http.Handler {

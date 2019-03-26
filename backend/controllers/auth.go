@@ -2,9 +2,9 @@ package controllers
 
 import (
 	"encoding/json"
+	"github.com/ramsgoli/thegoonlagoon/models"
+	"github.com/ramsgoli/thegoonlagoon/utils"
 	"net/http"
-	"thegoonlagoon/models"
-	"thegoonlagoon/utils"
 )
 
 func Login(w http.ResponseWriter, r *http.Request) {

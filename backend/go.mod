@@ -1,4 +1,4 @@
-module thegoonlagoon
+module github.com/ramsgoli/thegoonlagoon
 
 require (
 	cloud.google.com/go v0.37.1 // indirect
@@ -14,6 +14,6 @@ require (
 	github.com/joho/godotenv v1.3.0
 	github.com/lib/pq v1.0.0 // indirect
 	github.com/mattn/go-sqlite3 v1.10.0 // indirect
-	golang.org/x/crypto v0.0.0-20190320223903-b7391e95e576
+	golang.org/x/crypto v0.0.0-20190325154230-a5d413f7728c
 	google.golang.org/appengine v1.5.0 // indirect
 )
