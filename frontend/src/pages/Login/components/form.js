@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 
+import LoadingDots from '../../../components/LoadingDots'
+
 const FormWrapper = styled.div`
   display: flex;
   flex-flow: column;
@@ -36,7 +38,8 @@ const Submit = styled.button`
 class Form extends React.Component {
   state = {
     username: '',
-    password: ''
+    password: '',
+    loading: false
   }
 
   handleInput = e => {
@@ -51,15 +54,26 @@ class Form extends React.Component {
     e.preventDefault()
 
     const { username, password } = this.state
+    this.setState({
+      loading: true
+    })
+
     return this.props.login(username, password)
   }
 
   render() {
+    let buttonContents = 'Login'
+    if (this.state.loading) {
+      buttonContents = <LoadingDots />
+    }
+
     return (
       <FormWrapper> 
         <Input type="text" name="username" onChange={this.handleInput} />
         <Input type="password" name="password" onChange={this.handleInput} />
-        <Submit onClick={this.handleLogin}>Login</Submit>
+        <Submit onClick={this.handleLogin}>
+          { buttonContents }
+        </Submit>
       </FormWrapper>
     )
   }
