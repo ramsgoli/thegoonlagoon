@@ -47,12 +47,19 @@ class Form extends React.Component {
     }))
   }
 
+  handleLogin = e => {
+    e.preventDefault()
+
+    const { username, password } = this.state
+    return this.props.login(username, password)
+  }
+
   render() {
     return (
       <FormWrapper> 
         <Input type="text" name="username" onChange={this.handleInput} />
         <Input type="password" name="password" onChange={this.handleInput} />
-        <Submit>Login</Submit>
+        <Submit onClick={this.handleLogin}>Login</Submit>
       </FormWrapper>
     )
   }

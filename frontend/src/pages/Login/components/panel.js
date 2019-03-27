@@ -26,12 +26,12 @@ const H2 = styled.h2`
   margin-bottom: 24px;
 `
 
-const LoginPanel = () => {
+const LoginPanel = ({login}) => {
   return (
     <LoginPanelWrapper>
       <H1>Welcome back.</H1>
       <H2>sign in to your admin account.</H2>
-      <Form />
+      <Form login={login} />
     </LoginPanelWrapper>
   )
 }

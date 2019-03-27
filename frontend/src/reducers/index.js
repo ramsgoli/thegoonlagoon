@@ -1,15 +1,4 @@
-const initialState = {
-  loading: false
-}
+import { Auth, Login } from './Auth'
 
-const Auth = (state=initialState, action) => {
-  switch (action.type) {
-    case 'LOGIN':
-      return {
-        loading: true
-      }
-    default: return state
-  }
-}
-
-export default Auth
+export { Login }
+export { Auth }

@@ -1,8 +1,11 @@
 import React from 'react'
 import styled from 'styled-components/macro'
+import { connect } from 'react-redux'
+
 import Logo from '../../components/Logo'
 import LoginPanel from './components/panel'
 import SignInHint from './components/SignInHint'
+import { Login } from '../../reducers'
 
 const LoginWrapper = styled.div`
   display: flex;
@@ -14,16 +17,25 @@ const LoginWrapper = styled.div`
   background-color: #282c34;
 `
 
-class Login extends React.Component {
+class LoginContainer extends React.Component {
   render() {
     return (
       <LoginWrapper>
         <Logo />
-        <LoginPanel />
+        <LoginPanel login={this.props.login} />
         <SignInHint />
       </LoginWrapper>
     )
   }
 }
 
-export default Login
+const mapDispatchToProps = dispatch => {
+  return {
+    login: (username, password) => {
+      dispatch(Login(username, password))
+    }
+  }
+}
+
+
+export default connect(null, mapDispatchToProps)(LoginContainer)
