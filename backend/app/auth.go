@@ -10,9 +10,13 @@ import (
 	"strings"
 )
 
+var notAuth = []string{
+	"/api/user/signup",
+	"/api/user/login",
+}
+
 func JwtAuthentication(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		notAuth := []string{"/api/user/signup", "/api/user/login"}
 		requestPath := r.URL.Path
 
 		for _, value := range notAuth {
