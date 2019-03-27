@@ -33,14 +33,29 @@ const Submit = styled.button`
   }
 `
 
-const Form = () => {
-  return (
-    <FormWrapper> 
-      <Input />
-      <Input />
-      <Submit>Login</Submit>
-    </FormWrapper>
-  )
+class Form extends React.Component {
+  state = {
+    username: '',
+    password: ''
+  }
+
+  handleInput = e => {
+    const target = e.target
+    const name = target.name
+    this.setState(oldState => ({
+      [name]: target.value
+    }))
+  }
+
+  render() {
+    return (
+      <FormWrapper> 
+        <Input type="text" name="username" onChange={this.handleInput} />
+        <Input type="password" name="password" onChange={this.handleInput} />
+        <Submit>Login</Submit>
+      </FormWrapper>
+    )
+  }
 }
 
 export default Form
