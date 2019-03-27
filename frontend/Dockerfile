@@ -4,14 +4,14 @@ FROM alpine:3.8
 # Download and install packages
 RUN apk add -U nginx python make g++ nodejs npm yarn
 
-RUN mkdir -p /var/build
+RUN mkdir -p /var/working
 
-WORKDIR /var/build
-COPY package*.json yarn.lock /var/build
+WORKDIR /var/working
+COPY package*.json yarn.lock /var/working/
 RUN npm install
 
-COPY public/ /var/build/public/
-COPY src/ /var/build/src/
+COPY public/ /var/working/public/
+COPY src/ /var/working/src/
 
 RUN yarn build
 
@@ -21,7 +21,7 @@ FROM nginx:alpine
 COPY nginx.conf /etc/nginx/nginx.conf
 
 RUN mkdir -p /data/www/
-COPY --from=0 /var/build/ /data/www
+COPY --from=0 /var/working/build/ /data/www/
 
 EXPOSE 80
 
