@@ -13,6 +13,7 @@ import { ThemeProvider } from 'styled-components/macro'
 import './index.css'
 import Home from './pages/Home'
 import Login from './pages/Login'
+import SignUp from './pages/SignUp'
 
 const history = createBrowserHistory()
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -43,6 +44,7 @@ const Application = () => {
         <ConnectedRouter history={history}>
           <Route exact path='/' component={Home} />
           <Route path='/login' component={Login} />
+          <Route path='/signup' component={SignUp} />
         </ConnectedRouter>
       </Provider>
     </ThemeProvider>

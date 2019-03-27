@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 
-const SignInHintWrapper = styled.div`
+const SignUpHintWrapper = styled.div`
   display: flex;
   flex-flow: row;
   margin-top: 28px;
@@ -13,13 +13,13 @@ const Span = styled.span`
   cursor: pointer;
 `
 
-const SignInHint = () => {
+const SignUpHint = () => {
   return (
-    <SignInHintWrapper>
+    <SignUpHintWrapper>
       <p>Don't have an account?&nbsp;</p>
       <Span>Sign Up</Span>
-    </SignInHintWrapper>
+    </SignUpHintWrapper>
   )
 }
 
-export default SignInHint
+export default SignUpHint

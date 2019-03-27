@@ -1,30 +1,23 @@
 import React from 'react'
-import styled from 'styled-components/macro'
 import { connect } from 'react-redux'
 
+import Panel from '../../components/Panel'
 import Logo from '../../components/Logo'
-import LoginPanel from './components/panel'
-import SignInHint from './components/SignInHint'
+import AuthWrapper from '../../components/AuthWrapper'
+import SignUpHint from './components/SignUpHint'
+import Form from './components/form'
 import { Login } from '../../reducers'
-
-const LoginWrapper = styled.div`
-  display: flex;
-  min-height: 100vh;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #282c34;
-`
 
 class LoginContainer extends React.Component {
   render() {
     return (
-      <LoginWrapper>
+      <AuthWrapper>
         <Logo />
-        <LoginPanel login={this.props.login} />
-        <SignInHint />
-      </LoginWrapper>
+        <Panel>
+          <Form handleClick={this.props.login} />
+        </Panel>
+        <SignUpHint />
+      </AuthWrapper>
     )
   }
 }

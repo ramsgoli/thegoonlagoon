@@ -1,4 +1,4 @@
-import { Auth, Login } from './Auth'
+import { Auth, Login, SignUp } from './Auth'
 
-export { Login }
+export { Login, SignUp }
 export { Auth }

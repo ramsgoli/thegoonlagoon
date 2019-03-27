@@ -21,11 +21,20 @@ const H2 = styled.h2`
   margin-bottom: 24px;
 `
 
+const NameWrapper = styled.div`
+  display: flex;
+  flex-flow: row;
+`
+
 class Form extends React.Component {
   state = {
+    firstName: '',
+    lastName: '',
     username: '',
     password: '',
-    loading: false
+    confirmPassword: '',
+    loading: false,
+    error: false
   }
 
   handleInput = e => {
@@ -36,30 +45,40 @@ class Form extends React.Component {
     }))
   }
 
-  handleLogin = e => {
+  handleSignup = e => {
     e.preventDefault()
 
-    const { username, password } = this.state
+    const { firstName, lastName, username, password, confirmPassword } = this.state
+    if (password !== confirmPassword) {
+      return this.setState({
+        error: true
+      })
+    }
+
     this.setState({
       loading: true
     })
-
-    return this.props.handleClick(username, password)
+    return this.props.handleClick(firstName, lastName, username, password)
   }
 
   render() {
-    let buttonContents = 'Login'
+    let buttonContents = 'Sign Up'
     if (this.state.loading) {
       buttonContents = <LoadingDots />
     }
 
     return (
       <FormWrapper> 
-        <H1>Welcome back.</H1>
-        <H2>sign in to your admin account.</H2>
+        <H1>Welcome to the Goon Lagoon.</H1>
+        <H2>Sign up for an admin account if you are a goon.</H2>
+        <NameWrapper>
+          <Input type="text" placeholder="First Name" name="firstName" marginRight="7px" onChange={this.handleInput} />
+          <Input type="text" placeholder="Last Name" name="lastName" marginLeft="7px" onChange={this.handleInput} />
+        </NameWrapper>
         <Input type="text" placeholder="username" name="username" onChange={this.handleInput} />
         <Input type="password" placeholder="password" name="password" onChange={this.handleInput} />
-        <Submit onClick={this.handleLogin}>
+        <Input type="password" placeholder="confirm password" name="confirmPassword" onChange={this.handleInput} />
+        <Submit onClick={this.handleSignup}>
           { buttonContents }
         </Submit>
       </FormWrapper>
