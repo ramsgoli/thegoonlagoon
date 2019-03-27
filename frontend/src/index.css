@@ -24,6 +24,16 @@ h1 {
   font-size: 24px;
 }
 
+a {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+a:visited {
+  text-decoration: inherit;
+  color: inherit;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

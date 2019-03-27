@@ -1,33 +1,47 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import { Route } from 'react-router'
-import { routerReducer } from 'react-router-redux'
-import { BrowserRouter } from 'react-router-dom'
+import { createBrowserHistory } from 'history'
+import { connectRouter, routerMiddleware, ConnectedRouter } from 'connected-react-router'
 import { Auth } from './reducers'
+import { ThemeProvider } from 'styled-components/macro'
 
-import './index.css';
-import App from './App';
+import './index.css'
+import Home from './pages/Home'
 import Login from './pages/Login'
+
+const history = createBrowserHistory()
 
 const store = createStore(
   combineReducers({
     Auth,
-    routing: routerReducer
+    router: connectRouter(history)
   }),
-  applyMiddleware(thunk)
+  compose(
+    applyMiddleware(
+      thunk,
+      routerMiddleware(history)
+    )
+  )
 )
+
+const theme = {
+  main: '#282C34'
+}
 
 const Application = () => {
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <Route exact path='/' component={App} />
-        <Route path='/login' component={Login} />
-      </BrowserRouter>
-    </Provider>
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <Route exact path='/' component={Home} />
+          <Route path='/login' component={Login} />
+        </ConnectedRouter>
+      </Provider>
+    </ThemeProvider>
   )
 }
 
