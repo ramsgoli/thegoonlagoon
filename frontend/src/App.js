@@ -1,17 +1,27 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
 import styled from 'styled-components/macro'
-import './App.css'
 
 const AppWrapper = styled.div`
   text-align: center;
+`
+
+const AppHeader = styled.div`
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
 `
 
 class App extends Component {
   render() {
     return (
       <AppWrapper>
-        <header className="App-header">
+        <AppHeader>
           <img src={logo} className="App-logo" alt="logo" />
           <p>
             Edit <code>src/App.js</code> and save to reload.
@@ -24,7 +34,7 @@ class App extends Component {
           >
             Learn React
           </a>
-        </header>
+        </AppHeader>
       </AppWrapper>
     )
   }
