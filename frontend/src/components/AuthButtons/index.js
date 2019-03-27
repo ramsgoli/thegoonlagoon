@@ -9,6 +9,7 @@ const AuthButtonsWrapper = styled.div`
   position: absolute;
   right: 38px;
   top: 53px;
+  align-items: center;
 `
 
 const SignUpWrapper = styled.div`
@@ -23,9 +24,18 @@ const SignUpWrapper = styled.div`
   cursor: pointer;
 `
 
+const LoginWrapper = styled.div`
+  color: #FFFFFF;
+  margin-right: 48px;
+  cursor: pointer;
+`
+
 const AuthButtons = ({replace}) => {
   return (
     <AuthButtonsWrapper>
+      <LoginWrapper onClick={() => replace('login')}>
+        Sign In
+      </LoginWrapper>
       <SignUpWrapper onClick={() => replace('signup')}>
         Sign Up
       </SignUpWrapper>
