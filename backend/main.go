@@ -12,6 +12,7 @@ import (
 func main() {
 	router := mux.NewRouter()
 	router.Use(app.JwtAuthentication)
+	router.Use(app.CorsCheck)
 
 	router.HandleFunc("/api/user/login", controllers.Login).Methods("POST")
 	router.HandleFunc("/api/user/signup", controllers.SignUp).Methods("POST")
